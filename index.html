@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Full page scroll</title>
+    <link rel="stylesheet" type="text/css" href="full-page-scroll.css">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+    <!--font awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/solid.css" integrity="sha384-v2Tw72dyUXeU3y4aM2Y0tBJQkGfplr39mxZqlTBDUZAb9BGoC40+rdFCG0m10lXk" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/fontawesome.css" integrity="sha384-q3jl8XQu1OpdLgGFvNRnPdj5VIlCvgsDQTQB6owSOHWlAurxul7f+JpUOVdAiJ5P" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <style type="text/css">
+        /* Center the loader */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        #head{
+            position: fixed;
+            z-index: 99999;
+            width: 100%;
+/*            border: 1px solid blue;*/
+        }
+
+        #head ul {
+            list-style-type: none;
+            width: 100%;
+            margin-left: auto;
+            margin-right: auto;
+
+
+        }
+
+        #head ul li {
+            width: 20%;
+            float:left;
+/*            border: 1px solid red;*/
+            padding: 30px 0;
+        }
+
+
+        #head ul li a {
+            text-decoration: none;
+            font-size: 20px;
+            color: white;
+            display: block;
+            padding: 10px 0;
+            width: 20%;
+            width: 100%;
+            text-align: center;
+
+        }
+        #head ul li a:hover{
+
+
+        }
+        #head >i {
+            font-size: 2em;
+            color: white;
+            padding: 10px 12px;
+            border: 1px solid white;
+            border-radius: 50%;
+            display: none;
+     }
+        .section1 {
+            background-color: #7DBCD4;
+            position: relative;
+
+        }
+        .section1>.fa-align-right {
+            color: white;
+            font-size: 2em;
+            padding: 5px 7px;
+            border: 1px solid red;
+            border-radius: 50%;
+        }
+
+        .section2 {
+            background-color: #98C19F;
+            position: relative;
+        }
+
+        .section3 {
+            background-color: #A199E2;
+            position: relative;
+        }
+
+        .section4 {
+            background-color: #CC938E;
+            position: relative;
+        }
+
+        .section5 {
+            background-color: #D2C598;
+            position: relative;
+        }
+
+        section div {
+            font-family: 'Open Sans';
+            font-style: normal;
+            text-align: center;
+            position: relative;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        span {
+            font-size: 4em;
+            font-style: normal;
+            color: #fff;
+        }
+
+
+      #head ul li.on a{
+        color: red;
+      }
+    </style>
+</head>
+
+<body>
+
+    <header id="head">
+       <i class="fas fa-align-right"></i>
+        <ul>
+            <li><a href="index.html#0"><i class="fas fa-home"></i>HOME</a></li>
+            <li><a href="index.html#1">ABOUT ME</a></li>
+            <li><a href="index.html#2">PORTFOLIO</a></li>
+            <li><a href="index.html#3">CONTACT</a></li>
+        </ul>
+    </header>
+    <div id="main" class="scroll-container">
+        <section class="section1">
+            <div>
+                <span>Page #1</span>
+            </div>
+        </section>
+        <section class="section2">
+            <div>
+                <span>Page #2</span>
+            </div>
+        </section>
+        <section class="section3">
+            <div>
+                <span>Page #3</span>
+            </div>
+        </section>
+        <section class="section4">
+            <div>
+                <span>Page #4</span>
+            </div>
+        </section>
+        <section class="section5">
+            <div>
+                <span>Page #5</span>
+            </div>
+        </section>
+    </div>
+    <script src="full-page-scroll.js"></script>
+    <script type="text/javascript">
+        new fullScroll({
+            displayDots: true,
+            dotsPosition: 'left',
+            animateTime: 0.7,
+            animateFunction: 'ease'
+        });
+
+    </script>
+
+    <script>
+      $(function(){
+
+        // click
+        $('#head ul li a').click(function(){
+          $('#head ul li').removeClass('on');
+          $(this).parent().addClass('on');
+        });
+        $('#head ul li').first().find('a').trigger('click');
+
+        // 인디케이터
+        $('.dots a').click(function(){
+          var i = $(this).parent().index();
+          $('#head ul li').removeClass('on');
+          $('#head ul li').eq(i).addClass('on');
+          console.log(i);
+        });
+
+        // scroll-container
+        $("html, body").on('mousewheel DOMMouseScroll', function(e) {
+            var E = e.originalEvent;
+            delta = 0;
+            delta = E.wheelDelta;
+            // console.log(delta);
+
+            // console.log(E.detail);
+            $('.dots li').each(function(i){
+              var t = $(this).find('a').hasClass('active');
+              console.log(t);
+              if(t){
+                $('#head ul li').removeClass('on');
+                $('#head ul li').eq(i).addClass('on');
+                console.log(i);
+              }
+            });
+        });
+
+      });
+    </script>
+</body>
+
+</html>
